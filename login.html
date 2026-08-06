@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Shopee Seller Centre & Customer</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="bg-gray-100 font-sans flex items-center justify-center h-screen">
+
+  <div class="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+    
+    <!-- Header / Brand Shopee Orange -->
+    <div class="bg-orange-600 p-6 text-white text-center">
+      <div class="flex items-center justify-center gap-2 mb-1">
+        <i class="ph-bold ph-shopping-bag text-3xl"></i>
+        <h1 class="text-2xl font-bold">Shopee ID</h1>
+      </div>
+      <p class="text-xs text-orange-100">Silakan masuk ke Akun Anda</p>
+    </div>
+
+    <!-- Pilihan Tab Login (Admin / Customer) -->
+    <div class="flex border-b border-gray-200 bg-gray-50 text-sm font-semibold">
+      <button onclick="switchTab('customer')" id="tab-customer" class="flex-1 py-3 text-orange-600 border-b-2 border-orange-600 transition">
+        Customer / Pembeli
+      </button>
+      <button onclick="switchTab('admin')" id="tab-admin" class="flex-1 py-3 text-gray-500 hover:text-gray-700 transition">
+        Admin / Seller
+      </button>
+    </div>
+
+    <!-- Form Area -->
+    <div class="p-8">
+      
+      <!-- FORM CUSTOMER -->
+      <form id="form-customer" onsubmit="handleLogin(event, 'customer')" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Email / No. Handphone</label>
+          <input type="text" required placeholder="Contoh: budi@gmail.com atau 0812345" 
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-orange-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Password</label>
+          <input type="password" required placeholder="Masukkan password akun" 
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-orange-500">
+        </div>
+        <button type="submit" class="w-full bg-orange-600 text-white py-2.5 rounded-lg text-sm font-bold hover:bg-orange-700 transition shadow-md">
+          Masuk sebagai Customer
+        </button>
+      </form>
+
+      <!-- FORM ADMIN (Username: admin, Password: 123) -->
+      <form id="form-admin" onsubmit="handleLogin(event, 'admin')" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Username Admin</label>
+          <input type="text" id="admin-user" required placeholder="admin" 
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-orange-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Password Admin</label>
+          <input type="password" id="admin-pass" required placeholder="123" 
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-orange-500">
+        </div>
+        <!-- Pesan Error untuk Admin -->
+        <p id="error-msg" class="text-xs text-red-500 hidden font-medium">Username atau Password admin salah! (Gunakan admin / 123)</p>
+        
+        <button type="submit" class="w-full bg-orange-600 text-white py-2.5 rounded-lg text-sm font-bold hover:bg-orange-700 transition shadow-md">
+          Masuk sebagai Seller/Admin
+        </button>
+        <p class="text-xs text-center text-gray-400 mt-2">Default: username <b>admin</b>, password <b>123</b></p>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Logika Tab & Validasi Login -->
+  <script>
+    function switchTab(type) {
+      const tabCustomer = document.getElementById('tab-customer');
+      const tabAdmin = document.getElementById('tab-admin');
+      const formCustomer = document.getElementById('form-customer');
+      const formAdmin = document.getElementById('form-admin');
+      const errorMsg = document.getElementById('error-msg');
+
+      errorMsg.classList.add('hidden');
+
+      if (type === 'customer') {
+        tabCustomer.className = "flex-1 py-3 text-orange-600 border-b-2 border-orange-600 transition font-semibold";
+        tabAdmin.className = "flex-1 py-3 text-gray-500 hover:text-gray-700 transition";
+        formCustomer.classList.remove('hidden');
+        formAdmin.classList.add('hidden');
+      } else {
+        tabAdmin.className = "flex-1 py-3 text-orange-600 border-b-2 border-orange-600 transition font-semibold";
+        tabCustomer.className = "flex-1 py-3 text-gray-500 hover:text-gray-700 transition";
+        formAdmin.classList.remove('hidden');
+        formCustomer.classList.add('hidden');
+      }
+    }
+
+    function handleLogin(event, role) {
+      event.preventDefault();
+
+      if (role === 'admin') {
+        const user = document.getElementById('admin-user').value;
+        const pass = document.getElementById('admin-pass').value;
+        const errorMsg = document.getElementById('error-msg');
+
+        // Validasi kredensial admin
+        if (user === 'admin' && pass === '123') {
+          alert('Login Berhasil! Masuk ke Dashboard Admin Seller Centre.');
+          // Anda bisa mengarahkan ke halaman admin: window.location.href = "admin_dashboard.html";
+        } else {
+          errorMsg.classList.remove('hidden');
+        }
+      } else {
+        alert('Login Berhasil! Selamat datang Customer Shopee.');
+        // window.location.href = "customer_home.html";
+      }
+    }
+  </script>
+</body>
+</html>
