@@ -27,7 +27,11 @@
             <div class="flex space-x-4 items-center">
                 <a href="#" class="hover:opacity-80"><i class="fa-regular fa-bell mr-1"></i> Notifikasi</a>
                 <a href="#" class="hover:opacity-80"><i class="fa-regular fa-circle-question mr-1"></i> Bantuan</a>
-                <button onclick="toggleAuthModal()" class="font-bold hover:opacity-80">Daftar | Login</button>
+                
+                <!-- Container Login / Status User & Logout -->
+                <div id="authContainer" class="flex items-center">
+                    <button onclick="toggleAuthModal()" class="font-bold hover:opacity-80">Daftar | Login</button>
+                </div>
             </div>
         </div>
     </div>
@@ -217,7 +221,7 @@
             </button>
             <h3 class="text-lg font-bold text-gray-800 mb-4">Log In Shopee</h3>
             <form onsubmit="handleAuth(event)" class="space-y-3">
-                <input type="text" placeholder="No. Handphone / Email / Username" required class="w-full px-3 py-2 border rounded text-xs focus:outline-none focus:border-orange-500">
+                <input type="text" id="usernameInput" placeholder="No. Handphone / Email / Username" required class="w-full px-3 py-2 border rounded text-xs focus:outline-none focus:border-orange-500">
                 <input type="password" placeholder="Password" required class="w-full px-3 py-2 border rounded text-xs focus:outline-none focus:border-orange-500">
                 <button type="submit" class="w-full shopee-orange text-white py-2 rounded font-bold text-xs uppercase tracking-wider hover:opacity-90 transition">LOG IN</button>
             </form>
@@ -344,9 +348,29 @@
 
         let cart = [];
         let activeCategory = 'all';
+        let isLoggedIn = false;
+        let currentUser = '';
 
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+        }
+
+        function updateAuthUI() {
+            const container = document.getElementById('authContainer');
+            if (isLoggedIn) {
+                container.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-user text-sm"></i>
+                        <span class="font-bold">${currentUser}</span>
+                        <span>|</span>
+                        <button onclick="handleLogout()" class="font-bold text-orange-100 hover:underline hover:opacity-90 transition">Logout</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <button onclick="toggleAuthModal()" class="font-bold hover:opacity-80">Daftar | Login</button>
+                `;
+            }
         }
 
         function renderProducts(items) {
@@ -505,8 +529,19 @@
 
         function handleAuth(e) {
             e.preventDefault();
+            const inputVal = document.getElementById('usernameInput').value || "User Shopee";
+            currentUser = inputVal.includes('@') ? inputVal.split('@')[0] : inputVal;
+            isLoggedIn = true;
+            updateAuthUI();
             alert("Berhasil masuk akun Shopee!");
             toggleAuthModal();
+        }
+
+        function handleLogout() {
+            isLoggedIn = false;
+            currentUser = '';
+            updateAuthUI();
+            alert("Anda telah berhasil logout.");
         }
 
         function checkout() {
@@ -523,6 +558,7 @@
         // Init
         renderProducts(products);
         renderFlashSale();
+        updateAuthUI();
     </script>
 </body>
 </html>
