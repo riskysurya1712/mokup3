@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopee Seller Centre - Dashboard Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .shopee-orange { background-color: #ee4d2d; }
+        .shopee-text-orange { color: #ee4d2d; }
+        .shopee-border-orange { border-color: #ee4d2d; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center gap-2 shopee-text-orange">
+                    <i class="fa-solid fa-bag-shopping text-3xl"></i> Shopee
+                </a>
+                <span class="text-xs bg-orange-100 shopee-text-orange font-bold px-2 py-0.5 rounded">Seller Centre</span>
+            </div>
+            
+            <div class="flex items-center space-x-4 text-xs font-semibold text-gray-600">
+                <button class="hover:text-orange-600 flex items-center gap-1">
+                    <i class="fa-regular fa-bell text-base"></i>
+                    <span class="bg-red-500 text-white rounded-full px-1.5 py-0.2 text-[10px]">3</span>
+                </button>
+                <div class="h-4 w-px bg-gray-300"></div>
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTVyO5RTZ1-Ch41rDV2kNtCQLta7FjWbY7eJzDxUvreSQNd_JMe0F5HdpmpmWEFYHnxfNlLpJHI3-lG4No" class="w-7 h-7 rounded-full object-cover">
+                    <span>Toko Official Store</span>
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full flex flex-col md:flex-row gap-6">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-56 bg-white rounded-md shadow-sm border border-gray-200 p-3 h-fit text-xs">
+            <div class="space-y-1">
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded shopee-orange text-white font-bold">
+                    <i class="fa-solid fa-chart-line text-sm"></i> Dashboard Utama
+                </a>
+                <a href="#produk-management" class="flex items-center gap-3 px-3 py-2.5 rounded text-gray-600 hover:bg-orange-50 hover:text-orange-600 font-medium transition">
+                    <i class="fa-solid fa-box text-sm"></i> Kelola Produk
+                </a>
+                <a href="#pesanan-management" class="flex items-center gap-3 px-3 py-2.5 rounded text-gray-600 hover:bg-orange-50 hover:text-orange-600 font-medium transition">
+                    <i class="fa-solid fa-file-invoice text-sm"></i> Pesanan Masuk
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-gray-600 hover:bg-orange-50 hover:text-orange-600 font-medium transition">
+                    <i class="fa-solid fa-ticket text-sm"></i> Promosi & Voucher
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-gray-600 hover:bg-orange-50 hover:text-orange-600 font-medium transition">
+                    <i class="fa-solid fa-gear text-sm"></i> Pengaturan Toko
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="flex-1 space-y-6">
+            
+            <!-- Welcome Header -->
+            <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-5 rounded-md shadow-sm flex justify-between items-center">
+                <div>
+                    <h1 class="text-xl font-bold">Selamat Datang Kembali, Admin Toko! 👋</h1>
+                    <p class="text-xs opacity-90 mt-1">Performa toko Anda meningkat +12.4% minggu ini. Pertahankan!</p>
+                </div>
+                <button onclick="openAddProductModal()" class="bg-white text-orange-600 hover:bg-gray-100 text-xs font-bold px-4 py-2 rounded shadow transition">
+                    + Tambah Produk Baru
+                </button>
+            </div>
+
+            <!-- Ringkasan Performa (KPI Metrics) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-md border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold">Total Penjualan (Bulan Ini)</p>
+                    <p class="text-xl font-extrabold shopee-text-orange mt-2">Rp 12.850.000</p>
+                    <span class="text-[10px] text-green-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +8.2%</span>
+                </div>
+                <div class="bg-white p-4 rounded-md border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold">Pesanan Perlu Diproses</p>
+                    <p class="text-xl font-extrabold text-blue-600 mt-2">18 Pesanan</p>
+                    <span class="text-[10px] text-yellow-600 font-bold">Perlu Dikirim Hari Ini</span>
+                </div>
+                <div class="bg-white p-4 rounded-md border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold">Total Produk Aktif</p>
+                    <p class="text-xl font-extrabold text-gray-800 mt-2" id="totalProductCount">6 Produk</p>
+                    <span class="text-[10px] text-gray-400">Siap Dijual</span>
+                </div>
+                <div class="bg-white p-4 rounded-md border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold">Rating Toko</p>
+                    <p class="text-xl font-extrabold text-yellow-500 mt-2"><i class="fa-solid fa-star"></i> 4.9 <span class="text-xs text-gray-400 font-normal">/ 5.0</span></p>
+                    <span class="text-[10px] text-gray-500">Dari 1.240 Ulasan</span>
+                </div>
+            </div>
+
+            <!-- Tabel Manajemen Produk -->
+            <section id="produk-management" class="bg-white rounded-md shadow-sm border border-gray-200 p-4">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b pb-3 mb-4">
+                    <h2 class="font-bold text-sm text-gray-800 uppercase tracking-wide">Daftar Katalog Produk</h2>
+                    <input type="text" id="adminSearchInput" oninput="filterAdminProducts()" placeholder="Cari nama produk atau ID..." class="px-3 py-1.5 border rounded text-xs w-full sm:w-64 focus:outline-none focus:border-orange-500">
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 border-b">
+                                <th class="p-2.5">Info Produk</th>
+                                <th class="p-2.5">Kategori</th>
+                                <th class="p-2.5">Harga</th>
+                                <th class="p-2.5">Stok</th>
+                                <th class="p-2.5">Penjualan</th>
+                                <th class="p-2.5 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminProductTable" class="divide-y divide-gray-100">
+                            <!-- Render via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tabel Pesanan Terbaru -->
+            <section id="pesanan-management" class="bg-white rounded-md shadow-sm border border-gray-200 p-4">
+                <h2 class="font-bold text-sm text-gray-800 uppercase tracking-wide border-b pb-3 mb-4">Pesanan Masuk Terbaru</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 border-b">
+                                <th class="p-2.5">No. Pesanan</th>
+                                <th class="p-2.5">Pembeli</th>
+                                <th class="p-2.5">Total Bayar</th>
+                                <th class="p-2.5">Status</th>
+                                <th class="p-2.5 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="p-2.5 font-mono font-bold text-orange-600">#SPX-2026080601</td>
+                                <td class="p-2.5 font-semibold">Budi Santoso</td>
+                                <td class="p-2.5 font-bold">Rp 189.000</td>
+                                <td class="p-2.5"><span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-[10px] font-bold">Perlu Dikirim</span></td>
+                                <td class="p-2.5 text-center">
+                                    <button onclick="alert('Resi Pengiriman Berhasil Dibuat!')" class="shopee-orange text-white px-2.5 py-1 rounded text-[10px] font-bold hover:opacity-90">Atur Pengiriman</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-mono font-bold text-orange-600">#SPX-2026080602</td>
+                                <td class="p-2.5 font-semibold">Siti Aminah</td>
+                                <td class="p-2.5 font-bold">Rp 79.000</td>
+                                <td class="p-2.5"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-bold">Selesai</span></td>
+                                <td class="p-2.5 text-center">
+                                    <button class="bg-gray-200 text-gray-600 px-2.5 py-1 rounded text-[10px] font-bold cursor-not-allowed">Selesai</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal Tambah / Edit Produk -->
+    <div id="productModal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-md max-w-md w-full p-5 shadow-2xl relative">
+            <button onclick="closeProductModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="modalFormTitle" class="text-base font-bold text-gray-800 border-b pb-2 mb-4">Tambah Produk Baru</h3>
+            
+            <form onsubmit="handleSaveProduct(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="editProductId">
+                <div>
+                    <label class="font-semibold text-gray-700">Nama Produk</label>
+                    <input type="text" id="prodName" required class="w-full mt-1 px-3 py-1.5 border rounded focus:outline-none focus:border-orange-500">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="font-semibold text-gray-700">Kategori</label>
+                        <select id="prodCat" class="w-full mt-1 px-3 py-1.5 border rounded focus:outline-none focus:border-orange-500">
+                            <option value="Pakaian">Pakaian</option>
+                            <option value="Elektronik">Elektronik</option>
+                            <option value="Sepatu">Sepatu</option>
+                            <option value="Aksesoris">Aksesoris</option>
+                            <option value="Kecantikan">Kecantikan</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700">Harga (Rp)</label>
+                        <input type="number" id="prodPrice" required class="w-full mt-1 px-3 py-1.5 border rounded focus:outline-none focus:border-orange-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="font-semibold text-gray-700">Stok Barang</label>
+                        <input type="number" id="prodStock" required class="w-full mt-1 px-3 py-1.5 border rounded focus:outline-none focus:border-orange-500">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700">Lokasi Toko</label>
+                        <input type="text" id="prodLoc" required class="w-full mt-1 px-3 py-1.5 border rounded focus:outline-none focus:border-orange-500" value="Jakarta Barat">
+                    </div>
+                </div>
+                <div>
+                    <label class="font-semibold text-gray-700">URL Gambar Produk</label>
+                    <input type="url" id="prodImg" required class="w-full mt-1 px-3 py-1.5 border rounded focus:outline-none focus:border-orange-500" placeholder="https://...">
+                </div>
+
+                <div class="pt-3 flex justify-end gap-2">
+                    <button type="button" onclick="closeProductModal()" class="px-4 py-1.5 border rounded text-gray-600 font-bold hover:bg-gray-50">Batal</button>
+                    <button type="submit" class="px-4 py-1.5 shopee-orange text-white rounded font-bold hover:opacity-90">Simpan Produk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script Manajemen Data Admin -->
+    <script>
+        // Synchronized Product Data dari Front-Store
+        let adminProducts = [
+            {
+                id: 1,
+                name: "Kemeja Blouse Wanita Casual Korean Style",
+                category: "Pakaian",
+                price: 79000,
+                stock: 45,
+                sold: "2,4rb",
+                image: "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lik586ws4y9615"
+            },
+            {
+                id: 2,
+                name: "Headphone Bluetooth Gaming Wireless Over Ear Extra Bass",
+                category: "Elektronik",
+                price: 189000,
+                stock: 12,
+                sold: "5,1rb",
+                image: "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSza89HOiD1erbGsgCr0SdN9i_wEughlh4kFEMr8dN-b5Cs69Zqqs84xPKTsyYu1gdMD9LCnW14dmUf6Wk"
+            },
+            {
+                id: 3,
+                name: "Sneakers Wanita/Pria Sports Running Shoes Trendy White",
+                category: "Sepatu",
+                price: 135000,
+                stock: 8,
+                sold: "1,8rb",
+                image: "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTCAai_jj-mUf6ZYuY65iaAKpJ-LZ0NatkyTr9RwHRl8OzGbgnW4wp4C4rFMaHe36KdaxuuyGsrfx2ubIE"
+            },
+            {
+                id: 4,
+                name: "Tas Ransel Wanita Import Korea Canvas Backpack Fashion",
+                category: "Aksesoris",
+                price: 98000,
+                stock: 20,
+                sold: "950",
+                image: "https://down-id.img.susercontent.com/file/19407314938d1cf8efb1c7864c5b6ebd"
+            },
+            {
+                id: 5,
+                name: "Jam Tangan Pria Sporty Elegan Leather Strap Water Resistant",
+                category: "Aksesoris",
+                price: 165000,
+                stock: 30,
+                sold: "3,3rb",
+                image: "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSlo8xRzO-bgWx9C-KXlPqv-NA4Y-2ZL5-ouwiorDAoJG_Hf7AiuMuZQ2Rr1sM9h_YaPzgGmlfnWAmw6TY"
+            },
+            {
+                id: 6,
+                name: "Serum Wajah Glowing Moisturizer Gel 30ml Hydra Lock",
+                category: "Kecantikan",
+                price: 59000,
+                stock: 100,
+                sold: "10rb+",
+                image: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTVyO5RTZ1-Ch41rDV2kNtCQLta7FjWbY7eJzDxUvreSQNd_JMe0F5HdpmpmWEFYHnxfNlLpJHI3-lG4No"
+            }
+        ];
+
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+        }
+
+        function renderAdminTable(data) {
+            const tbody = document.getElementById('adminProductTable');
+            tbody.innerHTML = '';
+            document.getElementById('totalProductCount').innerText = `${adminProducts.length} Produk`;
+
+            if(data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center p-4 text-gray-400">Tidak ada produk ditemukan.</td></tr>`;
+                return;
+            }
+
+            data.forEach(p => {
+                const stockBadge = p.stock < 15 ? `<span class="text-red-600 font-bold">(${p.stock} - Menipis)</span>` : `<span>${p.stock}</span>`;
+                
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-2.5 flex items-center gap-3">
+                            <img src="${p.image}" class="w-10 h-10 object-cover rounded border">
+                            <div>
+                                <p class="font-bold text-gray-800 line-clamp-1">${p.name}</p>
+                                <span class="text-[10px] text-gray-400">ID: #PRD-00${p.id}</span>
+                            </div>
+                        </td>
+                        <td class="p-2.5 font-medium text-gray-600">${p.category}</td>
+                        <td class="p-2.5 font-bold text-orange-600">${formatRupiah(p.price)}</td>
+                        <td class="p-2.5">${stockBadge}</td>
+                        <td class="p-2.5 font-semibold text-gray-700">${p.sold}</td>
+                        <td class="p-2.5 text-center space-x-2">
+                            <button onclick="openEditProductModal(${p.id})" class="text-blue-600 hover:text-blue-800 font-bold">Edit</button>
+                            <button onclick="deleteProduct(${p.id})" class="text-red-600 hover:text-red-800 font-bold">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function filterAdminProducts() {
+            const q = document.getElementById('adminSearchInput').value.toLowerCase();
+            const filtered = adminProducts.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+            renderAdminTable(filtered);
+        }
+
+        function openAddProductModal() {
+            document.getElementById('editProductId').value = '';
+            document.getElementById('modalFormTitle').innerText = "Tambah Produk Baru";
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodPrice').value = '';
+            document.getElementById('prodStock').value = '';
+            document.getElementById('prodImg').value = '';
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function openEditProductModal(id) {
+            const p = adminProducts.find(item => item.id === id);
+            document.getElementById('editProductId').value = p.id;
+            document.getElementById('modalFormTitle').innerText = "Edit Produk";
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCat').value = p.category;
+            document.getElementById('prodPrice').value = p.price;
+            document.getElementById('prodStock').value = p.stock;
+            document.getElementById('prodImg').value = p.image;
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        function handleSaveProduct(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editProductId').value;
+            const name = document.getElementById('prodName').value;
+            const category = document.getElementById('prodCat').value;
+            const price = parseInt(document.getElementById('prodPrice').value);
+            const stock = parseInt(document.getElementById('prodStock').value);
+            const image = document.getElementById('prodImg').value;
+
+            if (editId) {
+                // Edit mode
+                const idx = adminProducts.findIndex(p => p.id === parseInt(editId));
+                adminProducts[idx] = { ...adminProducts[idx], name, category, price, stock, image };
+            } else {
+                // Add mode
+                const newProd = {
+                    id: Date.now(),
+                    name,
+                    category,
+                    price,
+                    stock,
+                    sold: "0",
+                    image
+                };
+                adminProducts.unshift(newProd);
+            }
+
+            renderAdminTable(adminProducts);
+            closeProductModal();
+        }
+
+        function deleteProduct(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus produk ini dari toko?")) {
+                adminProducts = adminProducts.filter(p => p.id !== id);
+                renderAdminTable(adminProducts);
+            }
+        }
+
+        // Init Table Render
+        renderAdminTable(adminProducts);
+    </script>
+</body>
+</html>
