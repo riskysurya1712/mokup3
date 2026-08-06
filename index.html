@@ -503,26 +503,11 @@
             document.getElementById('authModal').classList.toggle('hidden');
         }
 
-        // KODE BARU (Ganti kode lama dengan ini):
-function handleAuthLogin(e) {
-    e.preventDefault();
-    
-    // Ambil nilai pilihan radio button (customer / admin)
-    const role = document.querySelector('input[name="userRole"]:checked').value;
-    const username = document.getElementById('loginUser').value;
-
-    if (role === 'admin') {
-        // Pindah halaman ke berkas admin.html
-        window.location.href = 'admin.html';
-    } else {
-        // Jika customer, tampilkan toko di halaman yang sama
-        document.getElementById('authSection').classList.add('hidden');
-        document.getElementById('customerDashboard').classList.remove('hidden');
-        document.getElementById('customerDashboard').classList.add('flex');
-        document.getElementById('customerNameTag').innerText = `Halo, ${username || 'Customer'}`;
-        renderCustomerProducts();
-    }
-
+        function handleAuth(e) {
+            e.preventDefault();
+            alert("Berhasil masuk akun Shopee!");
+            toggleAuthModal();
+        }
 
         function checkout() {
             if(cart.length === 0) {
